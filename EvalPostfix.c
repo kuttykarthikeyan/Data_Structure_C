@@ -19,7 +19,7 @@ int evaluatePostfix(char arr[]) {
     int i, operand1, operand2, result;
     for (i = 0; arr[i] != '\0'; i++) {
         if (isdigit(arr[i])) {
-            push(arr[i] - '0');
+            push(arr[i]-'0');
         } else {
             operand2 = pop();
             operand1 = pop();
