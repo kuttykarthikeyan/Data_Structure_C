@@ -4,7 +4,7 @@ int front=-1;int rear=-1;
 int size=3;
 int arr[3];
 void deque(){
-    if (front && rear==-1){
+    if (front ==-1 && rear==-1){
             printf("Queue is empty\n");
 
     }
@@ -23,13 +23,12 @@ void enque(int temp){
 if(rear==size-1){
     printf("Queue is  full\n");
 }
-else if(front&& rear==-1){
+else if(front ==-1 && rear==-1){
     front++;rear++;
     arr[front]=temp;
 }
 else{
     rear++;
-    rear=rear;
     arr[rear]=temp;
 }
 }
