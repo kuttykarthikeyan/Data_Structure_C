@@ -95,32 +95,9 @@ struct node *bsinsert(struct node *root, int val) {
     if (balance < -1 && val < root->rc->data) {
         RL(root);
         return LL(root);
+    }
 
     return root;
-}
-
-// Recursive function for AVL tree insertion
-void insert(struct node *t, int val) {
-    if (t == NULL)
-        t = newnode(val);
-    else if (t->data > val) {
-        t->lc = bsinsert(t->lc, val);
-        if (height(t->lc) - height(t->rc) == 2) {
-            if (val < t->lc->data)
-                t = RR(t);
-            else
-                LR(t);
-        }
-    } else if (t->data < val) {
-        t->rc = bsinsert(t->rc, val);
-        if (height(t->rc) - height(t->lc) == 2) {
-            if (val < t->rc->data)
-                LL(t);
-            else
-                RL(t);
-        }
-    }
-    t->height = maximum(height(t->lc), height(t->rc)) + 1;
 }
 
 // In-order traversal of the AVL tree
@@ -132,11 +109,20 @@ void inorder(struct node *root) {
     }
 }
 
+// Post-order traversal of the AVL tree
+void postorder(struct node *root) {
+    if (root != NULL) {
+        postorder(root->lc);
+        postorder(root->rc);
+        printf("%d ", root->data);
+    }
+}
+
 // Main function with a menu-driven interface
 int main() {
     int opt, val;
     while (1) {
-        printf("\n1.Insert\n2.Inorder\n3.Exit\n");
+        printf("\n1.Insert\n2.Inorder\n3.Postorder\n4.Exit\n");
         printf("Enter the option: ");
         scanf("%d", &opt);
 
@@ -144,7 +130,12 @@ int main() {
         case 1:
             printf("\nEnter value: ");
             scanf("%d", &val);
-            root = bsinsert(root, val);
+
+            if (root == NULL)
+                root = newnode(val);
+            else
+                root = bsinsert(root, val);
+
             break;
         case 2:
             if (root == NULL)
@@ -154,6 +145,13 @@ int main() {
             printf("\n");
             break;
         case 3:
+            if (root == NULL)
+                printf("No values to display\n");
+            else
+                postorder(root);
+            printf("\n");
+            break;
+        case 4:
             return 0;
         }
     }
