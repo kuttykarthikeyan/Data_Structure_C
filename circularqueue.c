@@ -4,50 +4,45 @@
 #include<string.h>
 #define size 3
 int front=-1;int rear=-1;
-int print=0;
 
 int arr[size];
-void deque(){
-    if (front && rear==-1){
+void dequeue(){
+    if (front==-1 && rear==-1){
             printf("Queue is empty\n");
-
     }
     else if(front==rear){
-            arr[front]=0;
+        printf("%d",arr[front]);
         front=-1;rear=-1;
-
     }
     else{
         printf("%d",arr[front]);
         arr[front]=0;
         front++;
         front=front%size;
-
-
-
     }
 }
-void enque(int temp){
-if((rear+1)%size == front){
-    printf("Queue is  full\n");
-}
-else if(front && rear==-1){
-    front++;rear++;
-    arr[front]=temp;
-}
-else{
-    rear++;
-    rear=rear%size;
-    arr[rear]=temp;
-}
+void enqueue(int temp){
+    if((rear+1)%size == front){
+        printf("Queue is  full\n");
+    }
+    else if(front==-1 && rear==-1){
+        front++;rear++;
+        arr[front]=temp;
+    }
+    else{
+        rear++;
+        rear=rear%size;
+        arr[rear]=temp;
+    }
 }
 void display(){
-    if(front && rear ==-1){
+    if(front==-1 && rear ==-1){
         printf("Queue is empty\n");
     }
     else
     {
-        for(int i=front; i<size; (i++)%size)
+        int i=front;
+        while(i<size)
         {
             if(i==rear)
             {
@@ -56,6 +51,8 @@ void display(){
             }
             else
                 printf("%d ",arr[i]);
+            i++;
+            i=i%size;
         }
     }
 }
@@ -77,10 +74,10 @@ void main()
             case 1:
                 printf("Enter the no. : ");
                 scanf("%d",&in);
-                enque(in);
+                enqueue(in);
                 break;
             case 2:
-                deque();
+                dequeue();
                 break;
 
             case 3:
@@ -90,7 +87,5 @@ void main()
             case 4:
                 exit(0);
         }
-
     }
-
 }
