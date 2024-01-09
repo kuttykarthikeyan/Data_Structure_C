@@ -56,15 +56,15 @@ struct node *LL(struct node *K2) {
 }
 
 // Right-Left rotation
-void RL(struct node *K3) {
+struct node *RL(struct node *K3) {
     K3->rc = RR(K3->rc);
-    K3 = LL(K3);
+    return LL(K3);
 }
 
 // Left-Right rotation
-void LR(struct node *K3) {
+struct node *LR(struct node *K3) {
     K3->lc = LL(K3->lc);
-    K3 = RR(K3);
+    return RR(K3);
 }
 
 // Binary search tree insertion
@@ -87,14 +87,12 @@ struct node *bsinsert(struct node *root, int val) {
     if (balance > 1 && val < root->lc->data)
         return RR(root);
     if (balance > 1 && val > root->lc->data) {
-        LR(root);
-        return RR(root);
+        return LR(root);
     }
     if (balance < -1 && val > root->rc->data)
         return LL(root);
     if (balance < -1 && val < root->rc->data) {
-        RL(root);
-        return LL(root);
+        return RL(root);
     }
 
     return root;
@@ -152,7 +150,7 @@ int main() {
             printf("\n");
             break;
         case 4:
-            return 0;
+            exit(0);
         }
     }
 }
