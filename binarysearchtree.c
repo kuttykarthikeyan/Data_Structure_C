@@ -66,7 +66,8 @@ struct bsnode *deletion(struct bsnode *root, int val) {
       struct bsnode *temp = root->rc;
       free(root);
       return temp;
-    } else if (root->rc == NULL) {
+    } 
+    else if (root->rc == NULL) {
       struct bsnode *temp = root->lc;
       free(root);
       return temp;
